@@ -17,7 +17,7 @@ export class AppService {
       photo?: Express.Multer.File[];
       logo?: Express.Multer.File[];
     },
-  ): Promise<Project> {
+  ) {
     const photoFile = files.photo?.[0];
     const logoFile = files.logo?.[0];
 
@@ -40,11 +40,11 @@ export class AppService {
     return await this.projectRepository.save(project);
   }
 
-  async getAllProjects(): Promise<Project[]> {
+  async getAllProjects() {
     return await this.projectRepository.find();
   }
 
-  async getProjectById(id: number): Promise<Project> {
+  async getProjectById(id: number) {
     try {
       const project = await this.projectRepository.findOne({ where: { id } });
       if (!project) {

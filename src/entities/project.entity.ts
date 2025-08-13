@@ -5,18 +5,18 @@ export class Project {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({nullable:true})
   name: string;
 
-  @Column()
+  @Column({nullable:true})
   description: string;
 
-  @Column()
+  @Column({default : '' , nullable : true})
   time: string;
 
-  @Column()
+  @Column({nullable:true})
   logo: string;
 
-  @Column()
+  @Column({nullable:true})
   photo: string;
 }
