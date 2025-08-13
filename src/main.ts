@@ -10,6 +10,6 @@ async function bootstrap() {
     prefix: '/uploads/',
   });
 
-  await app.listen(3000);
+  await app.listen(8998);
 }
 bootstrap();
