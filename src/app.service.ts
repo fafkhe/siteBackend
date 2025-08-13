@@ -47,7 +47,7 @@ export class AppService {
     try {
       const project = await this.projectRepository.findOne({ where: { id } });
       if (!project) {
-        throw new Error('Project not found');
+        throw new Error('Project not found'); 
       }
       return project;
     } catch (error) {

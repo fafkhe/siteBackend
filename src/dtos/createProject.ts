@@ -8,4 +8,7 @@ export class createProject {
   @IsNotEmpty()
   description: string;
 
+  @IsString()
+  @IsNotEmpty()
+  time: string;
 }

@@ -12,6 +12,9 @@ export class Project {
   description: string;
 
   @Column()
+  time: string;
+
+  @Column()
   logo: string;
 
   @Column()
