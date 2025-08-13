@@ -22,7 +22,7 @@ config();
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [Project],
-      synchronize: true,
+      synchronize: false,
     }),
     TypeOrmModule.forFeature([Project]),
   ],
