@@ -22,7 +22,7 @@ config();
       username: 'admin',
       password: 'admin!@#$%',
       database: 'test',
-      entities: ['./projects/**/entities/*.ts'],
+      entities: [Project],
       migrations: ['./projects/**/migrations/**.js'],
       synchronize: true,
       logging: true,
