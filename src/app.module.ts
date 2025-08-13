@@ -24,7 +24,7 @@ config();
       entities: [Project],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Project]),
+    // TypeOrmModule.forFeature([Project]),
   ],
   controllers: [AppController],
   providers: [AppService],
