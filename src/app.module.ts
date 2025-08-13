@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from 'dotenv';
 import { Project } from './entities/project.entity';
+import AppDataSource from './datasource';
 
 
 config();
@@ -16,13 +17,15 @@ config();
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST,
-      port: +process.env.DB_PORT, 
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      entities: [Project],
+      host: 'localhost',
+      port: 5432,
+      username: 'admin',
+      password: 'admin!@#$%',
+      database: 'test',
+      entities: ['./projects/**/entities/*.ts'],
+      migrations: ['./projects/**/migrations/**.js'],
       synchronize: true,
+      logging: true,
     }),
     TypeOrmModule.forFeature([Project]),
   ],
