@@ -16,10 +16,10 @@ export class createProject {
 
   @IsArray()
   @IsOptional()
-  images?: { name: string; src: string }[];
+  photo?: { name: string; src: string }[];
 
 
   @IsObject()
   @IsOptional()
-  logo?: string;
+  logo?: {name:string; src:string};
 }

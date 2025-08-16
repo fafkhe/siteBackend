@@ -18,8 +18,10 @@ export class Project {
   date: string;
 
   @Column({nullable:true})
-  logo: string;
+  logo: {name:string; src:string}
 
   @Column({nullable:true})
-  photo: string;
+  photos: [{ name: string; src: string }];
+
+
 }
