@@ -1,9 +1,10 @@
-import { IsNotEmpty, IsString } from '@nestjs/class-validator';
+import { IsNotEmpty, IsString ,IsArray,IsOptional, IsObject} from '@nestjs/class-validator';
 
 export class createProject {
   @IsString()
   @IsNotEmpty()
   name: string;
+
   @IsString()
   @IsNotEmpty()
   description: string;
@@ -11,4 +12,14 @@ export class createProject {
   @IsString()
   @IsNotEmpty()
   time: string;
+
+
+  @IsArray()
+  @IsOptional()
+  images?: { name: string; src: string }[];
+
+
+  @IsObject()
+  @IsOptional()
+  logo?: string;
 }
