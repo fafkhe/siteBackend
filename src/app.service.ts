@@ -19,7 +19,10 @@ export class AppService {
   return await this.projectRepository.save(project);
   
  } catch (error) {
-  
+  console.log(error,"error")
+  return{
+message:"error"
+  }
   }
 
 
