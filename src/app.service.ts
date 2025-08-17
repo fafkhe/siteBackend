@@ -13,42 +13,37 @@ export class AppService {
     private readonly projectRepository: Repository<Project>,
   ) {}
 
-  async createProject( createProductDto: createProject) {
- try {
-  const project = this.projectRepository.create(createProductDto);
-  return await this.projectRepository.save(project);
-  
- } catch (error) {
-  console.log(error,"error")
-  return{
-message:"error"
-  }
-  }
-
-
+  async createProject(createProductDto: createProject) {
+    try {
+      const project = this.projectRepository.create(createProductDto);
+      return await this.projectRepository.save(project);
+    } catch (error) {
+      console.log(error, 'error');
+      return {
+        message: 'error',
+      };
+    }
   }
 
   async getAllProjects() {
     return await this.projectRepository.find();
   }
 
-
-
-
   async handleFileUpload(file: Express.Multer.File): Promise<any> {
-
-     return {
-        message: '',
-        statusCode: 200,
-        data:`${process.env.UPLOAD_BASE_URL}/${file.filename}`
-      }
+    return {
+      message: '',
+      statusCode: 200,
+      data: `${process.env.UPLOAD_BASE_URL}/${file.filename}`,
+    };
   }
-    async handleMultipleFilesUpload(files: Express.Multer.File[]): Promise<any> { 
-     return {
-        message: '',  
-        statusCode: 200,
-        data: files.map(file => `${process.env.UPLOAD_BASE_URL}/${file.filename}`)
-      }
+  async handleMultipleFilesUpload(files: Express.Multer.File[]): Promise<any> {
+    return {
+      message: '',
+      statusCode: 200,
+      data: files.map(
+        (file) => `${process.env.UPLOAD_BASE_URL}/${file.filename}`,
+      ),
+    };
   }
 
   async deleteFile(filePath: string) {
