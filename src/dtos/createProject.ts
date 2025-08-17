@@ -16,7 +16,7 @@ export class createProject {
 
   @IsArray()
   @IsOptional()
-  photos?:string[]
+  photos?:string
 
 
   @IsObject()
