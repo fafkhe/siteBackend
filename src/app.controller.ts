@@ -35,7 +35,7 @@ export class AppController {
   //   ),
   // )
   async create(
-    @Body(new ValidationPipe()) body: createProject,
+    @Body() body: createProject,
     // @UploadedFiles()
     // files: {
     //   photo?: Express.Multer.File[];
@@ -63,7 +63,7 @@ export class AppController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body(new ValidationPipe()) body: updateProjectDto,
+    @Body() body: updateProjectDto,
   ) {
     return this.appService.update(+id, body);
   }
