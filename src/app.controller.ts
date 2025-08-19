@@ -60,7 +60,7 @@ export class AppController {
   }
 
   @Patch(':id')
-  update(@Param() id:string, @Body() body :updateProjectDto) {
+  update(@Param('id') id:string, @Body() body :updateProjectDto) {
     return this.appService.update(+id, body)
   }
 
