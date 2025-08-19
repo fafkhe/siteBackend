@@ -15,11 +15,11 @@ export class AppService {
     private readonly projectRepository: Repository<Project>,
   ) {}
 
-  async createProject(createProductDto: createProject) {
+  async createProject(body: any) {
     try {
-      console.log('console.log', createProductDto);
+      console.log('console.log', body);
       
-      const project = this.projectRepository.create(createProductDto);
+      const project = this.projectRepository.create(body);
       return await this.projectRepository.save(project);
     } catch (error) {
       console.log(error, 'error');
@@ -40,8 +40,8 @@ export class AppService {
         project.name = dto.name;
         project.description = dto.description;
         project.time = dto.time;
-        project.photos = dto.photos;
-        project.logo = dto.logo;
+        // project.photos = dto.photos;
+        // project.logo = dto.logo;
       }
 
       await this.projectRepository.save(project);

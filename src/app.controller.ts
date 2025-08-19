@@ -36,7 +36,7 @@ export class AppController {
   //   ),
   // )
   async create(
-    @Body() body: createProject,
+    @Body() body: any,
     // @UploadedFiles()
     // files: {
     //   photo?: Express.Multer.File[];

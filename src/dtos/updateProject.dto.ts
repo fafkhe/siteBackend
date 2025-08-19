@@ -14,12 +14,12 @@ export class updateProjectDto {
   time: string;
 
 
-  @IsArray()
-  @IsOptional()
-  photos?:string
+  // @IsArray()
+  // @IsOptional()
+  // photos?:string
 
 
-  @IsObject()
-  @IsOptional()
-  logo?:string
+  // @IsObject()
+  // @IsOptional()
+  // logo?:string
 }

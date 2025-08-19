@@ -13,13 +13,4 @@ export class createProject {
   @IsNotEmpty()
   time: string;
 
-
-  @IsArray()
-  @IsOptional()
-  photos?:string
-
-
-  @IsObject()
-  @IsOptional()
-  logo?:string
 }
