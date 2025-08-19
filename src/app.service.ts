@@ -17,7 +17,8 @@ export class AppService {
 
   async createProject(createProductDto: createProject) {
     try {
-
+      console.log('console.log', createProductDto);
+      
       const project = this.projectRepository.create(createProductDto);
       return await this.projectRepository.save(project);
     } catch (error) {
