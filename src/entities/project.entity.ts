@@ -17,9 +17,6 @@ export class Project {
   @Column({default : '' , nullable : true})
   time: string;
   
-  @Column({ default: '', nullable: true })
-  date: string;
-
   @Column({nullable:true})
   logo: string
 

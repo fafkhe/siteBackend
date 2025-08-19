@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  Delete,
+  Patch,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { createProject } from './dtos/createProject';
 import { UseInterceptors } from '@nestjs/common';
@@ -7,6 +15,7 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { UploadedFile, UploadedFiles } from '@nestjs/common';
+import { updateProjectDto } from './dtos/updateProject.dto';
 
 @Controller('projects')
 export class AppController {
@@ -48,6 +57,11 @@ export class AppController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.appService.getProjectById(+id);
+  }
+
+  @Patch(':id')
+  update(@Param() id: string, @Body() body: updateProjectDto) {
+    return this.appService.update(+id, body);
   }
 
   @Post('upload/multiple')

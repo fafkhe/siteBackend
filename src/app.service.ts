@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { createProject } from './dtos/createProject';
 import { Project } from './entities/project.entity';
+import { updateProjectDto } from './dtos/updateProject.dto';
 import { Model } from 'mongoose';
 import { join } from 'path';
 import * as fs from 'fs';
@@ -22,6 +23,29 @@ export class AppService {
       console.log(error, 'error');
       return {
         message: 'error',
+      };
+    }
+  }
+
+  async update(id: number, dto: updateProjectDto) {
+    try {
+      const project = await this.projectRepository.findOneBy({ id });
+      if (project) {
+        project.name = dto.name;
+        project.description = dto.description;
+        project.time = dto.time;
+        project.photos = dto.photos;
+        project.logo = dto.logo;
+
+        return {
+          statusCode: 201,
+          msg: 'updated successfully',
+        };
+      }
+    } catch (error) {
+      return {
+        statusCode: 500,
+        msg: 'internal server error',
       };
     }
   }
