@@ -36,12 +36,14 @@ export class AppService {
         project.time = dto.time;
         project.photos = dto.photos;
         project.logo = dto.logo;
-
-        return {
-          statusCode: 201,
-          msg: 'updated successfully',
-        };
       }
+
+      await this.projectRepository.save(project);
+
+      return {
+        statusCode: 201,
+        msg: 'updated successfully',
+      };
     } catch (error) {
       return {
         statusCode: 500,
