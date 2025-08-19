@@ -28,9 +28,17 @@ export class AppService {
 
   async remove(id: string) {
     try {
-      return await this.projectRepository.delete(id);
+      await this.projectRepository.delete(id);
+      return {
+        statusCode: 201,
+        msg: 'deleted successfully',
+      };
     } catch (error) {
       console.log(error, 'erroooorrr');
+      return {
+        statusCode: 500,
+        msg: 'internal server error',
+      };
     }
   }
 
