@@ -1,25 +1,17 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Get,
-  Param,
-} from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
 import { AppService } from './app.service';
 import { createProject } from './dtos/createProject';
 import { UseInterceptors } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { FileInterceptor,FilesInterceptor } from '@nestjs/platform-express';
-import { UploadedFile,UploadedFiles } from '@nestjs/common';
-
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { UploadedFile, UploadedFiles } from '@nestjs/common';
 
 @Controller('projects')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  
   @Post()
   // @UseInterceptors(
   //   FileFieldsInterceptor(
@@ -43,17 +35,20 @@ export class AppController {
     return this.appService.createProject(body);
   }
 
-
   @Get()
   async findAll() {
     return this.appService.getAllProjects();
+  }
+
+  @Delete(':id')
+  async remove(@Param() id: string) {
+    return this.appService.remove(id);
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.appService.getProjectById(+id);
   }
-
 
   @Post('upload/multiple')
   @UseInterceptors(
@@ -95,10 +90,10 @@ export class AppController {
     }),
   )
   async uploadMultipleFiles(@UploadedFiles() files: any) {
-    return this.appService .handleMultipleFilesUpload(files);
+    return this.appService.handleMultipleFilesUpload(files);
   }
 
-  @Post("upload")
+  @Post('upload')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
@@ -107,7 +102,8 @@ export class AppController {
           cb(null, uploadDir);
         },
         filename: (req, file, cb) => {
-          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+          const uniqueSuffix =
+            Date.now() + '-' + Math.round(Math.random() * 1e9);
           const fileExt = extname(file.originalname);
           const safeName = `${file.fieldname}-${uniqueSuffix}${fileExt}`;
           cb(null, safeName);
@@ -139,4 +135,3 @@ export class AppController {
     return this.appService.handleFileUpload(file);
   }
 }
-

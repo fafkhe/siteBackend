@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { createProject } from './dtos/createProject';
 import { Project } from './entities/project.entity';
+import { Model } from 'mongoose';
 import { join } from 'path';
 import * as fs from 'fs';
 
@@ -22,6 +23,14 @@ export class AppService {
       return {
         message: 'error',
       };
+    }
+  }
+
+  async remove(id: string) {
+    try {
+      return await this.projectRepository.delete(id);
+    } catch (error) {
+      console.log(error, 'erroooorrr');
     }
   }
 
