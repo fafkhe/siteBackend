@@ -29,6 +29,7 @@
     "@nestjs/platform-express": "^11.1.5",
     "@nestjs/typeorm": "^11.0.0",
     "@types/multer": "^2.0.0",
+    "class-transformer": "^0.5.1",
     "mongoose": "^8.17.0",
     "multer": "^2.0.2",
     "pg": "^8.16.3",
