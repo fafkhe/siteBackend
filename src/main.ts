@@ -10,7 +10,7 @@ async function bootstrap() {
     origin: '*', // specify the allowed origin
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // specify the allowed HTTP methods
   }),
-    // app.useGlobalPipes(new ValidationPipe());
+    app.useGlobalPipes(new ValidationPipe());
 
   // app.useStaticAssets(join(__dirname, '..', 'uploads'), {
   //   prefix: '/uploads/',

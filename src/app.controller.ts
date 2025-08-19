@@ -17,32 +17,14 @@ import { extname } from 'path';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { UploadedFile, UploadedFiles } from '@nestjs/common';
 import { updateProjectDto } from './dtos/updateProject.dto';
+import { UsePipes } from '@nestjs/common';
 
 @Controller('projects')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post()
-          // @UsePipes(new ValidationPipe())
-  // @UseInterceptors(
-  //   FileFieldsInterceptor(
-  //     [
-  //       { name: 'photo', maxCount: 1 },
-  //       { name: 'logo', maxCount: 1 },
-  //     ],
-  //     {
-  //       dest: './uploads',
-  //     },
-  //   ),
-  // )
-  async create(
-    @Body() body: any,
-    // @UploadedFiles()
-    // files: {
-    //   photo?: Express.Multer.File[];
-    //   logo?: Express.Multer.File[];
-    // },
-  ) {
+  async create(@Body() body: createProject) {
     return this.appService.createProject(body);
   }
 
@@ -62,10 +44,7 @@ export class AppController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() body: updateProjectDto,
-  ) {
+  update(@Param('id') id: string, @Body() body: updateProjectDto) {
     return this.appService.update(+id, body);
   }
 

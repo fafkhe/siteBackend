@@ -15,7 +15,7 @@ export class AppService {
     private readonly projectRepository: Repository<Project>,
   ) {}
 
-  async createProject(body: any) {
+  async createProject(body: createProject) {
     try {
       console.log('console.log', body);
       
