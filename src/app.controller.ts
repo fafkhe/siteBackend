@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Patch,
+  ValidationPipe,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { createProject } from './dtos/createProject';
@@ -34,7 +35,7 @@ export class AppController {
   //   ),
   // )
   async create(
-    @Body() body: createProject,
+    @Body(new ValidationPipe()) body: createProject,
     // @UploadedFiles()
     // files: {
     //   photo?: Express.Multer.File[];
@@ -60,8 +61,11 @@ export class AppController {
   }
 
   @Patch(':id')
-  update(@Param('id') id:string, @Body() body :updateProjectDto) {
-    return this.appService.update(+id, body)
+  update(
+    @Param('id') id: string,
+    @Body(new ValidationPipe()) body: updateProjectDto,
+  ) {
+    return this.appService.update(+id, body);
   }
 
   @Post('upload/multiple')
