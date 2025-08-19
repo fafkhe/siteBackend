@@ -23,6 +23,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post()
+          // @UsePipes(new ValidationPipe())
   // @UseInterceptors(
   //   FileFieldsInterceptor(
   //     [
