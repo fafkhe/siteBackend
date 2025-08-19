@@ -29,7 +29,11 @@ export class AppService {
 
   async update(id: number, dto: updateProjectDto) {
     try {
-      const project = await this.projectRepository.findOneBy({ id });
+      const project = await this.projectRepository.findOne({
+        where: {
+         id 
+      }});
+
       if (project) {
         project.name = dto.name;
         project.description = dto.description;
@@ -43,8 +47,10 @@ export class AppService {
       return {
         statusCode: 201,
         msg: 'updated successfully',
+        data: null,
       };
     } catch (error) {
+      console.log(error, '////error is here');
       return {
         statusCode: 500,
         msg: 'internal server error',

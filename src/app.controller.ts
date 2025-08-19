@@ -61,7 +61,7 @@ export class AppController {
 
   @Patch(':id')
   update(@Param() id:string, @Body() body :updateProjectDto) {
-    return this.appService.update(+id,  body)
+    return this.appService.update(+id, body)
   }
 
   @Post('upload/multiple')
