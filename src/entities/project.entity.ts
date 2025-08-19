@@ -24,7 +24,7 @@ export class Project {
   logo: string
 
   @Column({nullable:true})
-  photos: string[]
+  photos: string
 
 
 }
