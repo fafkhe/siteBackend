@@ -81,6 +81,7 @@ export class AppService {
   }
 
   async handleFileUpload(file: Express.Multer.File): Promise<any> {
+    console.log('fileeeee>>>>' , file)
     return {
       message: '',
       statusCode: 200,

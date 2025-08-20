@@ -78,7 +78,7 @@ export class AppController {
         const ext = extname(file.originalname).toLowerCase();
         const mime = file.mimetype;
         // if (forbiddenExts.includes(ext)) {
-        //   return cb(new BadRequestException('Forbidden file extension'), false);
+        //   return cb(new BadR equestException('Forbidden file extension'), false);
         // }
         // if (!allowedTypes.includes(mime)) {
         //   return cb(new BadRequestException('Unsupported file type'), false);

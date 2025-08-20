@@ -11,7 +11,7 @@ export class updateProjectDto {
 
   @IsString()
   @IsOptional()
-  time: string;
+  time: string; 
 
 
   // @IsArray()
