@@ -96,6 +96,7 @@ export class AppController {
     FileInterceptor('file', {
       storage: diskStorage({
         destination: (req, file, cb) => {
+          console.log('its come till here>>>' , file)
           const uploadDir = process.env.UPLOAD_DIR || 'uploads';
           cb(null, uploadDir);
         },
@@ -130,6 +131,7 @@ export class AppController {
     }),
   )
   async uploadFile(@UploadedFile() file: any) {
+    console.log('file isss>>>' , file)
     return this.appService.handleFileUpload(file);
   }
 }
