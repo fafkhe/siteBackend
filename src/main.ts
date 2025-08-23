@@ -13,10 +13,10 @@ async function bootstrap() {
   }),
     app.useGlobalPipes(new ValidationPipe());
   app.use(express.urlencoded({ extended: true, limit: '100mb' }))
-  // app.useStaticAssets(join(__dirname, '..', 'uploads'), {
-  //   prefix: '/uploads/',
-  // });
-
+  app.useStaticAssets(join(__dirname, '..', 'uploads'), {
+    prefix: '/uploads/',
+  });
+  
   await app.listen(8998);
 }
 bootstrap();
