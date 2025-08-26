@@ -30,15 +30,15 @@ export class NewUserController {
   //   return this.UserService.create(createNewUserDto);
   // }
 
-  // @Get()
-  // findAll() {
-  //   return this.newUserService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.UserService.findAll();
+  }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.newUserService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.UserService.findOne(+id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateNewUserDto: UpdateNewUserDto) {

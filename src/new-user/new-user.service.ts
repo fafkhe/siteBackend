@@ -6,6 +6,7 @@ import { CreateUserDto } from 'src/dtos/createUser.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { User } from './entities/new-user.entity';
+import { stat } from 'fs';
 
 @Injectable()
 export class NewUserService {
@@ -14,6 +15,13 @@ export class NewUserService {
     private readonly userRepo: Repository<User>,
     private jwtService: JwtService,
   ) {}
+
+  async createToken(payload: any): Promise<string> {
+    const token = await this.jwtService.signAsync(payload, {
+      expiresIn: '1m',
+    });
+    return token;
+  }
 
   async register(data: CreateUserDto) {
     try {
@@ -56,9 +64,8 @@ export class NewUserService {
 
   async login(phoneNumber: string, password: string) {
     try {
+      console.log(phoneNumber, password, '///////////console');
 
-      console.log(phoneNumber , password ,"///////////console");
-      
       const user = await this.userRepo.findOne({
         where: {
           phoneNumber: phoneNumber,
@@ -83,7 +90,9 @@ export class NewUserService {
 
       const payload = { sub: user.id, username: user.firstName };
 
-      const token = await this.jwtService.signAsync(payload);
+      const token = await this.jwtService.signAsync(payload, {
+        expiresIn: '1m',
+      });
 
       return {
         message: 'خوش آمدید',
@@ -99,5 +108,52 @@ export class NewUserService {
       };
     }
   }
-}
 
+  async findAll() {
+    try {
+      const users = await this.userRepo.find({});
+
+      return {
+        statusCode: 200,
+        message: 'ok',
+        data: users,
+      };
+    } catch (error) {
+      return {
+        statusCode: 500,
+        message: 'error',
+        data: null,
+      };
+    }
+  }
+
+  async findOne(userId: number) {
+    try {
+      const user = await this.userRepo.findOne({
+        where: {
+          id: userId,
+        },
+      });
+
+      if (!user) {
+        return {
+          statusCode: 400,
+          message: 'user not found',
+          data: null,
+        };
+      }
+
+      return {
+        statusCode: 200,
+        message: 'ok',
+        data: user,
+      };
+    } catch (error) {
+      return {
+        statusCode: 500,
+        message: 'internal server error ',
+        data: null,
+      };
+    }
+  }
+}
