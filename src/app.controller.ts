@@ -49,9 +49,10 @@ export class AppController {
 
   @Post('upload/multiple')
   @UseInterceptors(
-    FilesInterceptor('files', 10, {
+    FilesInterceptor('file', 10, {
       storage: diskStorage({
         destination: (req, file, cb) => {
+          console.log('its here forrr tests' , file)
           const uploadDir = process.env.UPLOAD_DIR || 'uploads';
           cb(null, uploadDir);
         },
@@ -87,14 +88,17 @@ export class AppController {
     }),
   )
   async uploadMultipleFiles(@UploadedFiles() files: any) {
+    console.log('last tessss' , files)
     return this.appService.handleMultipleFilesUpload(files);
   }
+
 
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
         destination: (req, file, cb) => {
+          console.log('its come till here>>>' , file)
           const uploadDir = process.env.UPLOAD_DIR || 'uploads';
           cb(null, uploadDir);
         },
@@ -129,6 +133,7 @@ export class AppController {
     }),
   )
   async uploadFile(@UploadedFile() file: any) {
+    console.log('file isss>>>' , file)
     return this.appService.handleFileUpload(file);
   }
 }
