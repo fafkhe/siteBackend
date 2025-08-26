@@ -8,6 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { CreateUserDto } from 'src/dtos/createUser.dto';
+import { loginDto } from 'src/dtos/createUser.dto';
 import { NewUserService } from './new-user.service';
 
 @Controller('user')
@@ -20,7 +21,7 @@ export class NewUserController {
   }
 
   @Post('/login')
-  login(@Body() body: CreateUserDto) {
+  login(@Body() body: loginDto) {
     return this.UserService.login(body.phoneNumber, body.password);
   }
 

@@ -23,3 +23,16 @@ export class CreateUserDto {
   @IsNotEmpty()
   phoneNumber: string;
 }
+
+
+export class loginDto {
+
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  phoneNumber: string;
+}
