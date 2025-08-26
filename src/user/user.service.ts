@@ -5,12 +5,14 @@ import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from 'src/dtos/createUser.dto';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
+    private jwtService: JwtService,
   ) {}
 
   async register(data: CreateUserDto) {
@@ -44,6 +46,49 @@ export class UserService {
     } catch (error) {
       console.log('error is sending otp', error);
 
+      return {
+        message: 'مشکلی از سمت سرور به وجود آمده',
+        statusCode: 500,
+        error: 'خطای داخلی سیستم',
+      };
+    }
+  }
+
+  async login(phoneNumber: string, password: string) {
+    try {
+      const user = await this.userRepo.findOne({
+        where: {
+          phoneNumber: phoneNumber,
+        },
+      });
+      if (!user || !user.password) {
+        return {
+          message: 'کاربر پیدا نشد',
+          statusCode: 400,
+          error: 'کاربر پیدا نشد',
+        };
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return {
+          message: 'اطلاعات درست نمی‌باشد',
+          statusCode: 400,
+          error: 'اطلاعات درست نمی‌باشد',
+        };
+      }
+
+      const payload = { sub: user.id, username: user.firstName };
+
+      const token = await this.jwtService.signAsync(payload);
+
+      return {
+        message: 'خوش آمدید',
+        statusCode: 200,
+        data: token,
+      };
+    } catch (error) {
+      console.log('Login error =>', error);
       return {
         message: 'مشکلی از سمت سرور به وجود آمده',
         statusCode: 500,

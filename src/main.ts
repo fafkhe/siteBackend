@@ -12,11 +12,11 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // specify the allowed HTTP methods
   }),
     app.useGlobalPipes(new ValidationPipe());
-  app.use(express.urlencoded({ extended: true, limit: '100mb' }))
+  app.use(express.urlencoded({ extended: true, limit: '100mb' }));
   app.useStaticAssets(join(__dirname, '..', 'uploads'), {
     prefix: '/uploads/',
   });
-  
+
   await app.listen(8999);
 }
 bootstrap();

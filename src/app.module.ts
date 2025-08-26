@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from 'dotenv';
 import { Project } from 'src/entities/project.entity';
 import { User } from './entities/user.entity';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './user/constansts';
 
 config();
 
@@ -13,6 +15,11 @@ config();
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+    }),
+      JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '60s' },
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
