@@ -56,6 +56,9 @@ export class NewUserService {
 
   async login(phoneNumber: string, password: string) {
     try {
+
+      console.log(phoneNumber , password ,"///////////console");
+      
       const user = await this.userRepo.findOne({
         where: {
           phoneNumber: phoneNumber,
