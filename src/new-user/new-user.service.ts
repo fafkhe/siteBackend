@@ -8,7 +8,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
-export class UserService {
+export class NewUserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
@@ -97,3 +97,4 @@ export class UserService {
     }
   }
 }
+

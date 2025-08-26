@@ -7,7 +7,8 @@ import { config } from 'dotenv';
 import { Project } from 'src/entities/project.entity';
 import { User } from './entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './user/constansts';
+import { NewUserModule } from './new-user/new-user.module';
+import { jwtConstants } from './new-user/constants';
 
 config();
 
@@ -34,6 +35,7 @@ config();
       logging: true,
     }),
     TypeOrmModule.forFeature([Project,User]),
+    NewUserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
