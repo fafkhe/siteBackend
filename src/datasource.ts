@@ -23,8 +23,8 @@ const AppDataSource = new DataSource({
   username: "admin",
   password: "admin!@#$%",
   database: "site",
-  entities: ["./projects/**/entities/*.ts"],
-  migrations: ["./projects/**/migrations/**.js"],
+  entities: ["./projects/**/entities/*.ts","./user/**/entities/*.ts"],
+  migrations: ["./projects/**/migrations/**.js","./user/**/migrations/**.js"],
   synchronize: true,
   logging: false,
 }); 
