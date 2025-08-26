@@ -12,4 +12,10 @@ export class UserController {
   register(@Body() body: CreateUserDto) {
     return this.usersService.register(body);
   }
+
+  
+  @Post('/login')
+  login(@Body() body: CreateUserDto) {
+    return this.usersService.login(body.phoneNumber,body.password);
+  }
 }
