@@ -16,6 +16,8 @@ import { config } from "process";
 // });
 
 
+
+
 const AppDataSource = new DataSource({
   type: "postgres",
   host: "localhost",
@@ -23,10 +25,18 @@ const AppDataSource = new DataSource({
   username: "admin",
   password: "admin!@#$%",
   database: "site",
-  entities: ["./projects/**/entities/*.ts","./user/**/entities/*.ts"],
-  migrations: ["./projects/**/migrations/**.js","./user/**/migrations/**.js"],
+  entities: [
+    __dirname + "/entities/*.entity{.ts,.js}", 
+    __dirname + "/new-user/entities/*.entity{.ts,.js}"
+  ],
+  migrations: [
+    __dirname + "/migrations/**/*{.ts,.js}",
+    __dirname + "/new-user/migrations/**/*{.ts,.js}" 
+  ],
   synchronize: true,
   logging: false,
-}); 
+});
+
+
 
 export default AppDataSource ;

@@ -5,10 +5,10 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from 'dotenv';
 import { Project } from 'src/entities/project.entity';
-import { User } from './entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { NewUserModule } from './new-user/new-user.module';
 import { jwtConstants } from './new-user/constants';
+import { User } from './new-user/entities/new-user.entity';
 
 config();
 
