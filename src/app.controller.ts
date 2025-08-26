@@ -11,7 +11,6 @@ import {
 import { AppService } from './app.service';
 import { createProject } from './dtos/createProject';
 import { UseInterceptors } from '@nestjs/common';
-import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';

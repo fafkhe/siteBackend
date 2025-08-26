@@ -4,8 +4,8 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from 'dotenv';
-import { Project } from './entities/project.entity';
-
+import { Project } from 'src/entities/project.entity';
+import { User } from './entities/user.entity';
 
 config();
 
@@ -21,12 +21,12 @@ config();
       username: 'postgres',
       password: 'admin!@#$%',
       database: 'test',
-      entities: [Project],
+      entities: [Project,User],
       migrations: ['./projects/**/migrations/**.js'],
       synchronize: true,
       logging: true,
     }),
-    TypeOrmModule.forFeature([Project]),
+    TypeOrmModule.forFeature([Project,User]),
   ],
   controllers: [AppController],
   providers: [AppService],

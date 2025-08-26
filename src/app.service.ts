@@ -18,7 +18,7 @@ export class AppService {
   async createProject(body: createProject) {
     try {
       console.log('console.log', body);
-      
+
       const project = this.projectRepository.create(body);
       return await this.projectRepository.save(project);
     } catch (error) {
@@ -33,8 +33,9 @@ export class AppService {
     try {
       const project = await this.projectRepository.findOne({
         where: {
-         id 
-      }});
+          id,
+        },
+      });
 
       if (project) {
         project.name = dto.name;
@@ -81,7 +82,7 @@ export class AppService {
   }
 
   async handleFileUpload(file: Express.Multer.File): Promise<any> {
-    console.log('fileeeee>>>>' , file)
+    console.log('fileeeee>>>>', file);
     return {
       message: '',
       statusCode: 200,
