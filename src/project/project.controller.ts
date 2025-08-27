@@ -28,7 +28,7 @@ export class ProjectController {
     return this.appService.createProject(body);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
     return this.appService.getAllProjects();
