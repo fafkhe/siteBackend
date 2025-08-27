@@ -5,8 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from 'src/dtos/createUser.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { User } from './entities/new-user.entity';
-import { stat } from 'fs';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class NewUserService {
@@ -64,8 +63,6 @@ export class NewUserService {
 
   async login(phoneNumber: string, password: string) {
     try {
-      console.log(phoneNumber, password, '///////////console');
-
       const user = await this.userRepo.findOne({
         where: {
           phoneNumber: phoneNumber,
@@ -153,6 +150,39 @@ export class NewUserService {
         statusCode: 500,
         message: 'internal server error ',
         data: null,
+      };
+    }
+  }
+
+  async activation(userId: number) {
+    try {
+      const user = await this.userRepo.findOne({
+        where: { id: userId },
+      });
+
+      if (!user) {
+        return {
+          message: 'کاربر پیدا نشد',
+          statusCode: 400,
+          error: 'کاربر پیدا نشد',
+        };
+      }
+
+      user.isActive = !user.isActive;
+
+      await this.userRepo.save(user);
+
+      return {
+        message: 'done',
+        statusCode: 200,
+        data: user,
+      };
+    } catch (error) {
+      console.log('error', error);
+      return {
+        message: 'مشکلی از سمت سرور به وجود آمده',
+        statusCode: 500,
+        error: 'خطای داخلی سیستم',
       };
     }
   }

@@ -1,21 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { createProject } from './dtos/createProject';
-import { Project } from './project/entities/project.entity';
-import { updateProjectDto } from './dtos/updateProject.dto';
-import { Model } from 'mongoose';
+import { Project } from './entities/project.entity';
+import { createProjectDto } from './dto/create-project.dto';
+import { updateProjectDto } from './dto/update-project.dto';
 import { join } from 'path';
 import * as fs from 'fs';
 
 @Injectable()
-export class AppService {
+export class ProjectService {
   constructor(
     @InjectRepository(Project)
     private readonly projectRepository: Repository<Project>,
   ) {}
 
-  async createProject(body: createProject) {
+  async createProject(body: createProjectDto) {
     try {
       console.log('console.log', body);
 

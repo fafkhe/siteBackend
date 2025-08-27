@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { Project } from "./entities/project.entity";
+import { Project } from "./project/entities/project.entity";
 import { config } from "process";
 
 
@@ -26,12 +26,12 @@ const AppDataSource = new DataSource({
   password: "admin!@#$%",
   database: "site",
   entities: [
-    __dirname + "/entities/*.entity{.ts,.js}", 
-    __dirname + "/new-user/entities/*.entity{.ts,.js}"
+    __dirname + "/project/entities/*.entity{.ts,.js}", 
+    __dirname + "/user/entities/*.entity{.ts,.js}"
   ],
   migrations: [
     __dirname + "/migrations/**/*{.ts,.js}",
-    __dirname + "/new-user/migrations/**/*{.ts,.js}" 
+    __dirname + "/user/migrations/**/*{.ts,.js}" 
   ],
   synchronize: true,
   logging: false,

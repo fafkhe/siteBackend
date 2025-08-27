@@ -4,11 +4,12 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from 'dotenv';
-import { Project } from 'src/entities/project.entity';
+import { Project } from './project/entities/project.entity';
 import { JwtModule } from '@nestjs/jwt';
-import { NewUserModule } from './new-user/new-user.module';
-import { jwtConstants } from './new-user/constants';
-import { User } from './new-user/entities/new-user.entity';
+import { NewUserModule } from './user/user.module';
+import { jwtConstants } from './user/constants';
+import { User } from './user/entities/user.entity';
+import { ProjectModule } from './project/project.module';
 
 config();
 
@@ -17,7 +18,7 @@ config();
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-      JwtModule.register({
+    JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '60s' },
@@ -29,13 +30,17 @@ config();
       username: 'postgres',
       password: 'admin!@#$%',
       database: 'test',
-      entities: [Project,User],
-      migrations: ['./projects/**/migrations/**.js','./users/**/migrations/**.js'],
+      entities: [Project, User],
+      migrations: [
+        './projects/**/migrations/**.js',
+        './users/**/migrations/**.js',
+      ],
       synchronize: true,
       logging: true,
     }),
-    TypeOrmModule.forFeature([Project,User]),
+    TypeOrmModule.forFeature([Project, User]),
     NewUserModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],

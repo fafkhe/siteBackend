@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from 'src/dtos/createUser.dto';
 import { loginDto } from 'src/dtos/createUser.dto';
-import { NewUserService } from './new-user.service';
+import { NewUserService } from './user.service';
 
 @Controller('user')
 export class NewUserController {
@@ -38,6 +38,11 @@ export class NewUserController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.UserService.findOne(+id);
+  }
+
+  @Patch('/disable/:id')
+  async disable(@Param('id') userId: number) {
+    return this.UserService.activation(userId);
   }
 
   // @Patch(':id')
