@@ -22,7 +22,7 @@ export class NewUserController {
     return this.UserService.register(body);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post('/login')
   login(@Body() body: loginDto) {
     return this.UserService.login(body.phoneNumber, body.password);
