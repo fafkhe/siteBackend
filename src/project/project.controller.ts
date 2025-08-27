@@ -16,6 +16,8 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { UploadedFile, UploadedFiles } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/user/gaurds/gaurds';
 import { UsePipes } from '@nestjs/common';
 
 @Controller('projects')
@@ -27,6 +29,8 @@ export class ProjectController {
     return this.appService.createProject(body);
   }
 
+
+  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
     return this.appService.getAllProjects();

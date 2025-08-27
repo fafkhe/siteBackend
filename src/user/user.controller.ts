@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from 'src/dtos/createUser.dto';
 import { loginDto } from 'src/dtos/createUser.dto';
 import { NewUserService } from './user.service';
+import { JwtAuthGuard } from './gaurds/gaurds';
 
 @Controller('user')
 export class NewUserController {
@@ -20,7 +22,7 @@ export class NewUserController {
     return this.UserService.register(body);
   }
 
-  @Post('/login')
+  @UseGuards(JwtAuthGuard)
   login(@Body() body: loginDto) {
     return this.UserService.login(body.phoneNumber, body.password);
   }
