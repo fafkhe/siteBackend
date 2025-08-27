@@ -17,8 +17,7 @@ import { extname } from 'path';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { UploadedFile, UploadedFiles } from '@nestjs/common';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/user/gaurds/gaurds';
-import { UsePipes } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/gaurds/gaurds';
 
 @Controller('projects')
 export class ProjectController {
@@ -28,7 +27,6 @@ export class ProjectController {
   async create(@Body() body: createProjectDto) {
     return this.appService.createProject(body);
   }
-
 
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -56,7 +54,7 @@ export class ProjectController {
     FilesInterceptor('file', 10, {
       storage: diskStorage({
         destination: (req, file, cb) => {
-          console.log('its here forrr tests' , file)
+          console.log('its here forrr tests', file);
           const uploadDir = process.env.UPLOAD_DIR || 'uploads';
           cb(null, uploadDir);
         },
@@ -92,17 +90,16 @@ export class ProjectController {
     }),
   )
   async uploadMultipleFiles(@UploadedFiles() files: any) {
-    console.log('last tessss' , files)
+    console.log('last tessss', files);
     return this.appService.handleMultipleFilesUpload(files);
   }
-
 
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
         destination: (req, file, cb) => {
-          console.log('its come till here>>>' , file)
+          console.log('its come till here>>>', file);
           const uploadDir = process.env.UPLOAD_DIR || 'uploads';
           cb(null, uploadDir);
         },
@@ -137,8 +134,7 @@ export class ProjectController {
     }),
   )
   async uploadFile(@UploadedFile() file: any) {
-    console.log('file isss>>>' , file)
+    console.log('file isss>>>', file);
     return this.appService.handleFileUpload(file);
   }
 }
-

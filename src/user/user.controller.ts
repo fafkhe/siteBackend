@@ -11,7 +11,7 @@ import {
 import { CreateUserDto } from 'src/dtos/createUser.dto';
 import { loginDto } from 'src/dtos/createUser.dto';
 import { NewUserService } from './user.service';
-import { JwtAuthGuard } from './gaurds/gaurds';
+import { JwtAuthGuard } from '../gaurds/gaurds';
 
 @Controller('user')
 export class NewUserController {
@@ -23,6 +23,7 @@ export class NewUserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Post('/login')
   login(@Body() body: loginDto) {
     return this.UserService.login(body.phoneNumber, body.password);
   }
@@ -42,6 +43,7 @@ export class NewUserController {
     return this.UserService.findOne(+id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch('/disable/:id')
   async disable(@Param('id') userId: number) {
     return this.UserService.activation(userId);
