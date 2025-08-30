@@ -16,6 +16,9 @@ export class ProjectService {
 
   async createProject(body: createProjectDto) {
     try {
+
+      console.log("///////////////// test");
+      
       console.log('console', body);
 
       const project = this.projectRepository.create(body);
