@@ -13,4 +13,15 @@ export class createProjectDto {
   @IsNotEmpty()
   time: string;
 
+
+  @IsNotEmpty()
+  @IsString()
+  logo: string;
+
+
+  @IsNotEmpty()
+  @IsString()
+  photos: string;
+
+
 }

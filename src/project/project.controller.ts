@@ -16,34 +16,34 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { UploadedFile, UploadedFiles } from '@nestjs/common';
-import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/gaurds/gaurds';
 
 @Controller('projects')
 export class ProjectController {
   constructor(private readonly appService: ProjectService) {}
 
+  // @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() body: createProjectDto) {
     return this.appService.createProject(body);
   }
 
-  // @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
     return this.appService.getAllProjects();
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Param() id: string) {
     return this.appService.remove(id);
   }
-
+  
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.appService.getProjectById(+id);
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() body: updateProjectDto) {
     return this.appService.update(+id, body);
